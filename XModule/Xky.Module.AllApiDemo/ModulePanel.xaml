@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Xky.XModule.AllApiDemo.ModulePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Xky.XModule.AllApiDemo"
+            xmlns:UserControl="clr-namespace:Xky.Core.UserControl;assembly=Xky.Core"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800" VerticalAlignment="Center">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/Strings.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/ScrollBars.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/ContextMenu.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/Animation.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/ToggleButton.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/ComboBox.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/DataGrid.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/RadioButton.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="/Xky.Core;component/UserControl/Styles/ToolTip.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#1d232a"   Height="780" MaxWidth="1024">
+        <Canvas  Panel.ZIndex="3"  Margin="0,0,0,0"  HorizontalAlignment="Right">
+            <UserControl:MyButton x:Name="Button_Close" Background="#454c56" Canvas.Right="20" Canvas.Top="20" Background_MouseOver="#e81123" Background_Pressed="#d20315"  Height="32" Margin="0" Text="关闭" Click="Button_Close_Click" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        </Canvas>
+        <Grid  Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+           
+        </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="1" Orientation="Horizontal">
+
+            
+                <UserControl:MyButton Click="MyButton_Click"  Text="执行adb shell指令" Tag="AdbShell" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Toast"  Text="在手机上弹出的提示信息" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Log"  Text="记录日志到系统日志中" Margin="0,0,10,10"></UserControl:MyButton>
+
+                <UserControl:MyButton Click="MyButton_Click" Tag="FindMe"  Text="查找当前设备" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="WakeUp"  Text="唤醒当前设备" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="LockScreen"  Text="锁屏当前设备" Margin="0,0,10,10"></UserControl:MyButton>
+
+                <UserControl:MyButton Click="MyButton_Click"  Tag="InstallApkFromUrl" Text="从url地址安装apk" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="RestartApp"  Text="重新启动APP" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="KillApp"  Text="结束在运行的APP" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="ClearApp" Text="清空APP所有数据(重装)" Margin="0,0,10,10"></UserControl:MyButton>
+
+               
+
+
+                <UserControl:MyButton Click="MyButton_Click" Tag="FindAllUiObject"  Text="查找所有UI元素" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="FindUiObjects"  Text="查找界面元素" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="FindAndClick"  Text="查找界面元素并点击它" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="FindAndInput"  Text="查找界面元素并输入文本" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Input"  Text="输入文本" Margin="0,0,10,10"></UserControl:MyButton>
+
+
+                <UserControl:MyButton Click="MyButton_Click" Tag="Click"  Text="点击指定位置" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="MouseDown" Text="按下指定位置" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="MouseUp"  Text="释放指定位置" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="MouseDrag"  Text="拖动指定位置" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Swipe"  Text="滑动" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="Wheel"   Text="滚动" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="PressKey"   Text="按下某个按键" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="SendEditorAction"   Text="发送编辑器动作" Margin="0,0,10,10"></UserControl:MyButton>
+
+                
+                <UserControl:MyButton Click="MyButton_Click" Tag="Copy"  Text="复制" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Paste"  Text="粘贴" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="Cut"  Text="剪切" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="SetClipboardText"   Text="设置设备上的剪贴板内容" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click"  Tag="GetClipboardText"   Text="读取设备上的剪贴板内容" Margin="0,0,10,10"></UserControl:MyButton>
+
+                
+                <UserControl:MyButton Click="MyButton_Click" Tag="SetInputMethod"  Text="设置输入法为X输入法" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="ShowInputMethod" Text="显示输入法选择框" Margin="0,0,10,10"></UserControl:MyButton>
+                
+                
+                <UserControl:MyButton Click="MyButton_Click" Tag="WriteStringToFile"  Text="写入文本到设备上" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="WriteBufferToFile"  Text="把二进制数组写入设备" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="ReadBufferFromFile"  Text="从设备读取二进制数据" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Click="MyButton_Click" Tag="ReadDir"  Text="读取设备上的目录信息" Margin="0,0,10,10"></UserControl:MyButton>
+
+
+
+
+
+                <UserControl:MyButton Tag="CreateHardware" Click="MyButton_Click"  Text="创建一个新的硬件全息信息" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="RestoreHardware"  Click="MyButton_Click"  Text="还原一个硬件全息信息" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="GetHardwareKey"  Click="MyButton_Click"  Text="读取当前设备的硬件全息key" Margin="0,0,10,10"></UserControl:MyButton>
+
+
+                <UserControl:MyButton Tag="GetCurrentAppSnapshot"  Click="MyButton_Click"  Text="获取当前设备的快照信息" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="CreateAppSnapshot"  Click="MyButton_Click"  Text="创建全息快照插槽" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="SetAppSnapshot"  Click="MyButton_Click"  Text="切换全息快照插槽" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="DelAppSnapshot" Click="MyButton_Click"   Text="删除全息快照插槽" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="GetAppSnapshotList"  Click="MyButton_Click"  Text="获取全息快照插槽列表" Margin="0,0,10,10"></UserControl:MyButton>
+
+
+                <UserControl:MyButton Tag="SetLocation" Click="MyButton_Click"  Text="设置定位坐标" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="GetLocation" Click="MyButton_Click"  Text="读取当前定位坐标" Margin="0,0,10,10"></UserControl:MyButton>
+
+
+                <UserControl:MyButton Tag="UpdateCameraFromUrl" Click="MyButton_Click"  Text="通过远程图片url更新摄像头内容" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="UpdateCameraFromFile"  Click="MyButton_Click"  Text="通过二进制图片数据更新摄像头内容" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="UpdateCameraFromText" Click="MyButton_Click"   Text="将文本内容保存为二维码更新摄像头内容" Margin="0,0,10,10"></UserControl:MyButton>
+
+                <UserControl:MyButton Tag="GetContacts" Click="MyButton_Click"  Text="获取联系人列表" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="InsertContacts"  Click="MyButton_Click"  Text="插入联系人列表" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton  Tag="ClearContacts" Click="MyButton_Click"  Text="清空联系人" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="InsertMedia"  Click="MyButton_Click"  Text="插入媒体库" Margin="0,0,10,10"></UserControl:MyButton>
+                <UserControl:MyButton Tag="ClearDcim"  Click="MyButton_Click"   Text="清空媒体库" Margin="0,0,10,10"></UserControl:MyButton>
+            </WrapPanel>
+         
+                <UserControl:MyTextBox  x:Name="TextBox_Result" Grid.Row="2"  LineHeight="20" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" WaterText=""></UserControl:MyTextBox>
+           
+        </Grid>
+    </Grid>
+</UserControl>

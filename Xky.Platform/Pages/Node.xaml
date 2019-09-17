@@ -1,0 +1,185 @@
+﻿<UserControl xmlns:UserControl="clr-namespace:Xky.Core.UserControl;assembly=Xky.Core"  x:Class="Xky.Platform.Pages.Node"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Xky.Platform.Pages"
+             x:Name="Page_Node"
+             xmlns:lib="clr-namespace:Xky.Core.UserControl.Lib;assembly=Xky.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <lib:SwitchConverter x:Key="ConnectStatusToBursh">
+            <lib:SwitchConverterCase When="0" Then="red" />
+            <lib:SwitchConverterCase When="1" Then="green" />
+            <lib:SwitchConverterCase When="2" Then="green" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="ConnectStatusToStr">
+            <lib:SwitchConverterCase When="0" Then="离线" />
+            <lib:SwitchConverterCase When="1" Then="成功通过P2P网络连接" />
+            <lib:SwitchConverterCase When="2" Then="成功通过当前局域网连接" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="ConnectionHashToBursh">
+            <lib:SwitchConverterCase When="null" Then="transparent" />
+            <lib:SwitchConverterCase  Then="#343c43" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="ConnectionHashToVisible">
+            <lib:SwitchConverterCase When="null" Then="Collapsed" />
+            <lib:SwitchConverterCase  Then="Visible" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="ConnectionHashToHidden">
+            <lib:SwitchConverterCase When="null" Then="Visible" />
+            <lib:SwitchConverterCase  Then="Collapsed" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="NodeUrlToHidden">
+            <lib:SwitchConverterCase When="null" Then="Collapsed" />
+            <lib:SwitchConverterCase  Then="Visible" />
+        </lib:SwitchConverter>
+        <lib:SwitchConverter x:Key="NodeUrlToVisible">
+            <lib:SwitchConverterCase When="null" Then="Visible" />
+            <lib:SwitchConverterCase  Then="Collapsed" />
+        </lib:SwitchConverter>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BackgroundColor4}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <Label FontFamily="Microsoft YaHei"  Grid.Row="0" Padding="0" FontSize="30" Foreground="White" Margin="20,0,40,0" VerticalAlignment="Center" VerticalContentAlignment="Center">节点管理</Label>
+            <UserControl:MyButton  Text="手动添加节点"  Click="Btn_AddToCloud_Click" VerticalAlignment="Center" Margin="0,0,20,0" Image="/Xky.Platform;component/Resources/Icon/add.png" Image_Height="16" Image_Width="16"/>
+            <UserControl:MyTagLabel Text="正在为您持续查找当前局域网内节点设备..."   Foreground="#999" Background="#303740" Padding="6">
+                <UserControl.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation  Duration="0:0:0.5" From="0.8" To="0.5" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="Opacity">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </UserControl.Triggers>
+            </UserControl:MyTagLabel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="10"
+                                      ScrollViewer.CanContentScroll="True" VirtualizingStackPanel.IsVirtualizing="True">
+
+            <ItemsControl x:Name="NodeListBox" Margin="0,0,0,1" Grid.Row="1" 
+                     ScrollViewer.CanContentScroll="True"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.ScrollUnit="Item"
+                    
+                     ScrollViewer.ScrollChanged="NodeListBox_ScrollChanged">
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Style.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-150,0,0">
+                                                <Label Margin="0,5,0,15" Foreground="#ccc" FontSize="18">该授权尚未绑定节点或未在当前局域网发现节点设备</Label>
+                                                <TextBlock Margin="0,0,0,5" Foreground="#ccc" Text="1、联系官方购买专用节点服务器设备。"/>
+                                                <TextBlock Margin="0,0,0,5" Foreground="#ccc" Text="2、接通节点服务器电源，使用网线将设备连接到当前局域网中并等待10秒钟左右。"/>
+                                                <TextBlock Margin="0,0,0,5"  Foreground="#ccc" Text="3、完成以上操作后节点服务器仍然不能出现在该面板上，请检查路由器是否设置为“自动获取IP”，节点设备网口灯是否闪烁。"/>
+                                                <TextBlock Margin="0,0,0,5"  Foreground="#ccc" Text="4、联系官方获取技术支持。"/>
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10" x:Name="DataGrid">
+                            <Border Background="{Binding  Path=ConnectionHash,Converter={StaticResource ConnectionHashToBursh}}" BorderThickness="0"  CornerRadius="5"></Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="1">
+                                    <Border BorderThickness="2" CornerRadius="5">
+                                        <Border.BorderBrush>
+                                            <VisualBrush>
+                                                <VisualBrush.Visual>
+                                                    <Rectangle StrokeDashArray="4 2" Stroke="#343c43" StrokeThickness="2"
+                  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                  Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Border.BorderBrush>
+                                        <StackPanel Margin="10,5,10,5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Visibility="{Binding  Path=ConnectionHash,Converter={StaticResource ConnectionHashToHidden}}" Width="16" Height="16" VerticalAlignment="Center"  Source="/Xky.Platform;component/Resources/Icon/newnode.png"/>
+                                                <Ellipse Visibility="{Binding  Path=ConnectionHash,Converter={StaticResource ConnectionHashToVisible}}" Margin="5" Width="12" Height="12" VerticalAlignment="Center" Fill="{Binding  Path=ConnectStatus,Converter={StaticResource ConnectStatusToBursh}}"></Ellipse>
+                                                <Label Grid.Row="0"  VerticalAlignment="Center"  Foreground="#fff" Width="200" FontSize="18" Margin="0,5,0,5" Content="{Binding  Path=Name}"></Label>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Foreground="#999"  HorizontalContentAlignment="Left" Width="60">序列号</Label>
+                                                <Label Foreground="#fff" Content="{Binding  Path=Serial}"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Foreground="#999"  HorizontalContentAlignment="Left" Width="60">IP地址</Label>
+                                                <Label Foreground="#fff" Content="{Binding  Path=Ip}"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Label Foreground="#999"  HorizontalContentAlignment="Left" Width="60" >在线设备</Label>
+                                                <Label Foreground="#fff" Content="{Binding  Path=DeviceCount}" Visibility="{Binding Path=DataContext.NodeUrl,ElementName=DataGrid,Converter={StaticResource NodeUrlToHidden}}"></Label>
+                                                <Label Foreground="#fff" Content="-" Visibility="{Binding Path=DataContext.NodeUrl,ElementName=DataGrid,Converter={StaticResource NodeUrlToVisible}}"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                                                <Label Foreground="#999"  HorizontalContentAlignment="Left" Width="60">上线时间</Label>
+                                                <Label Foreground="#fff" Content="{Binding  Path=LoadTick}"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Foreground="#999"  HorizontalContentAlignment="Left" Width="60" >连接状态</Label>
+                                                <Label Foreground="#fff" Content="{Binding  Path=ConnectStatus,Converter={StaticResource ConnectStatusToStr}}"  Visibility="{Binding  Path=ConnectionHash,Converter={StaticResource ConnectionHashToVisible}}"></Label>
+                                                <Label Foreground="#fff" Content="已连接到局域网，未绑定到当前授权"  Visibility="{Binding  Path=ConnectionHash,Converter={StaticResource ConnectionHashToHidden}}"></Label>
+                                            </StackPanel>
+                                            <StackPanel HorizontalAlignment="Right"  VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,5,0,0">
+                                                <UserControl:MyImageButton ToolTip="管理"  Visibility="{Binding Path=DataContext.NodeUrl,ElementName=DataGrid,Converter={StaticResource NodeUrlToHidden}}" Tag="{Binding Path=DataContext.NodeUrl,ElementName=DataGrid}" Click="Btn_Setting_Click" CornerRadius="2" Image_Height="16" Image_Width="16" Height="32" Width="32" Image="/Xky.Platform;component/Resources/Icon/btn_setting.png" Background_MouseOver="#444e57" Background_Pressed="#3b444c"/>
+                                                <UserControl:MyImageButton ToolTip="管理"  Visibility="{Binding Path=DataContext.NodeUrl,ElementName=DataGrid,Converter={StaticResource NodeUrlToVisible}}"  Tag="{Binding Path=DataContext.Ip,ElementName=DataGrid}" Click="Btn_Setting_Click" CornerRadius="2" Image_Height="16" Image_Width="16" Height="32" Width="32" Image="/Xky.Platform;component/Resources/Icon/btn_setting.png" Background_MouseOver="#444e57" Background_Pressed="#3b444c"/>
+                                                <UserControl:MyImageButton ToolTip="修改名称"  Tag="{Binding Path=DataContext.Serial,ElementName=DataGrid}" Click="Btn_Edit_Click" CornerRadius="2" Image_Height="16" Image_Width="16" Height="32" Width="32"  Visibility="{Binding Path=DataContext.ConnectionHash,ElementName=DataGrid,Converter={StaticResource ConnectionHashToVisible}}" Image="/Xky.Platform;component/Resources/Icon/edit.png" Background_MouseOver="#444e57" Background_Pressed="#3b444c"/>
+                                                <UserControl:MyImageButton ToolTip="删除" Tag="{Binding Path=DataContext.Id,ElementName=DataGrid}"  Click="Btn_Delete_Click"  CornerRadius="2" Image_Height="16" Image_Width="16" Height="32" Width="32"  Visibility="{Binding Path=DataContext.ConnectionHash,ElementName=DataGrid,Converter={StaticResource ConnectionHashToVisible}}" Image="/Xky.Platform;component/Resources/Icon/delete.png" Background_MouseOver="#444e57" Background_Pressed="#3b444c"/>
+                                                <UserControl:MyImageButton ToolTip="绑定到当前授权"  Click="Btn_AddToCloud_Click"  Tag="{Binding Path=DataContext.Serial,ElementName=DataGrid}" CornerRadius="2" Image_Height="16" Image_Width="16" Height="32" Width="32" Visibility="{Binding Path=DataContext.ConnectionHash,ElementName=DataGrid,Converter={StaticResource ConnectionHashToHidden}}" Image="/Xky.Platform;component/Resources/Icon/addtocloud.png" Background_MouseOver="#444e57" Background_Pressed="#3b444c"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </Border>
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+        <ContentControl Grid.Row="1" x:Name="ContentControl_AddToCloud" Visibility="Collapsed" Panel.ZIndex="99">
+
+            <StackPanel Orientation="Vertical" Margin="50" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                    <Label Foreground="#fff" Width="70" HorizontalAlignment="Left" Margin="0,0,0,5">备注名称</Label>
+                    <UserControl:MyTextBox x:Name="TextBox_Name" WaterText="备注名称"  Width="300" Height="30"></UserControl:MyTextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Foreground="#fff" Width="70"  HorizontalAlignment="Left"  Margin="0,0,0,5">序列号</Label>
+                    <UserControl:MyTextBox  x:Name="TextBox_Serial"  WaterText="序列号"  Width="300" Height="30"></UserControl:MyTextBox>
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9BC11E1A-7D11-461B-824E-AC1894EE7F5B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Xky.Platform</RootNamespace>
+    <AssemblyName>Xky.Platform</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Xky.Platform.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon\myico.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>xky.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_Publish|AnyCPU'">
+    <OutputPath>bin\Release_Publish\</OutputPath>
+    <DefineConstants>TRACE;publish</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Log.xaml.cs">
+      <DependentUpon>Log.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainControl.xaml.cs">
+      <DependentUpon>MainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Node.xaml.cs">
+      <DependentUpon>Node.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Task.xaml.cs">
+      <DependentUpon>Task.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Pages\Log.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Node.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Setting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Task.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="xky.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\ControlBox\default\close_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\close_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\close_btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\myico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\ControlBox\default\max_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\max_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\max_btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\ControlBox\default\restore_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\restore_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\restore_btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\ControlBox\default\min_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\min_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\default\min_btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xky.Core\Xky.Core.csproj">
+      <Project>{f16de544-b643-4655-8318-ba53d9d34bdc}</Project>
+      <Name>Xky.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xky.Socket\Xky.Socket.csproj">
+      <Project>{B4C79CEE-4B09-428A-BFE9-B276DF4F57FA}</Project>
+      <Name>Xky.Socket</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\whatapps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voice_on.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\ControlBox\dark\close_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\close_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\close_btn3.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\max_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\max_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\max_btn3.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\min_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\min_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\min_btn3.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\restore_btn1.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\restore_btn2.png" />
+    <Resource Include="Resources\Icon\ControlBox\dark\restore_btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bigbox.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smallbox.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voice_alert.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voice_off.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\authority.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\devices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\nodes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\Device\device_android1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\debugcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\setdebug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\Device\testbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\Device\back.png" />
+    <Resource Include="Resources\Icon\Device\home.png" />
+    <Resource Include="Resources\Icon\Device\task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\Device\back_click.png" />
+    <Resource Include="Resources\Icon\Device\back_hover.png" />
+    <Resource Include="Resources\Icon\Device\home_click.png" />
+    <Resource Include="Resources\Icon\Device\home_hover.png" />
+    <Resource Include="Resources\Icon\Device\task_click.png" />
+    <Resource Include="Resources\Icon\Device\task_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\lannode_online.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\btn_setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\addtocloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\newnode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\myico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-up-pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\btn_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-down-pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-up-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\volume-down-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\phonemenu-input-white.png" />
+    <Resource Include="Resources\Icon\phonemenu-stop-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\DeviceMenu\local-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\local-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\openinput-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\openinput-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\refresh-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\refresh-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\selectinput-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\selectinput-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\setdebug-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\setdebug-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\stop-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\stop-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\volumedown-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\volumedown-white.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\volumeup-black.png" />
+    <Resource Include="Resources\Icon\DeviceMenu\volumeup-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\device_disconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\DeviceMenu\backgroundapps-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\Log\error.png" />
+    <Resource Include="Resources\Icon\Log\info.png" />
+    <Resource Include="Resources\Icon\Log\success.png" />
+    <Resource Include="Resources\Icon\Log\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon\hide.png" />
+    <Resource Include="Resources\Icon\reload.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
