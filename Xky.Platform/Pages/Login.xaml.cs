@@ -25,16 +25,17 @@ namespace Xky.Platform.Pages
         public Login()
         {
             InitializeComponent();
+
             BtnLogin.Click += Login_Click;
             Client.StartAction(() =>
             {
                 var json = Common.LoadJson("license");
                 if (json != null) Common.UiAction(() => { LicenseKey.Text = json["license"].ToString(); });
                 Common.UiAction(() => { LoadingTextBlock.Text = "正在检查系统更新..."; });
-#if publish
-                //正式版则检查更新
+                #if publish
+                // 正式版则检查更新
                 Upgrade();
-#endif
+                #endif
                 MirrorScreen.Decoder = new H264Decoder();
                 Thread.Sleep(500);
                 Common.UiAction(() =>
@@ -164,7 +165,6 @@ namespace Xky.Platform.Pages
                 //    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {

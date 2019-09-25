@@ -50,8 +50,6 @@
                                                Source="{Binding Path=Baseurl,Converter={StaticResource ButtonStatus},ConverterParameter=close_btn1.png}"
                                                Stretch="Fill" Width="32" Height="32" />
                                         <ControlTemplate.Triggers>
-
-
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="Source"
                                                         Value="{Binding Path=Baseurl,Converter={StaticResource ButtonStatus},ConverterParameter=close_btn2.png}"
@@ -161,7 +159,6 @@
             </VirtualizingStackPanel>
         </Grid>
 
-
         <!-- Toast -->
         <VirtualizingStackPanel x:Name="ToastPanel" Grid.Row="0" Margin="0,0,0,100" Grid.RowSpan="2" Grid.Column="0"
                                 Opacity="100"
@@ -197,8 +194,6 @@
 
         <!-- 第一栏 -->
         <Grid Grid.Column="0" Background="Transparent" Grid.Row="0" Grid.RowSpan="2">
-
-
             <VirtualizingStackPanel VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True">
                 <userControl:MyTabItem x:Name="LogoTabItem" ToolTip="侠客云" CheckLicense="False"
                                        ImgSource="Resources/Icon/logo.png" PageName="Logo"
@@ -239,6 +234,4 @@
         </Border>
 
     </Grid>
-
-
 </Window>

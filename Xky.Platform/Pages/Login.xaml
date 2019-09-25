@@ -9,8 +9,7 @@
     <Grid>
         <Grid x:Name="GridLoading" Background="{StaticResource BackgroundColor4}" Visibility="Visible">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="800">
-                <TextBlock x:Name="LoadingTextBlock" HorizontalAlignment="Center"
-                           Foreground="{StaticResource White}" Text="Loading..." />
+                <TextBlock x:Name="LoadingTextBlock" HorizontalAlignment="Center" Foreground="{StaticResource White}" Text="Loading..." />
                 <UserControl:MyProgressbar x:Name="LoadingBar" Maximum="1" Visibility="Collapsed"
                                            Value="0"
                                            Width="500"

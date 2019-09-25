@@ -154,7 +154,7 @@ namespace Xky.Platform
             MainWindow.MessageContent.Content = myControl;
             MainWindow.MessageContentBorader.Visibility = Visibility.Visible;
             _isShowMessage = true;
-            //这里是用于堵塞ui达到showdialog的效果
+            // 这里是用于堵塞ui达到showdialog的效果
             var frame = new DispatcherFrame();
             new Thread(() =>
             {

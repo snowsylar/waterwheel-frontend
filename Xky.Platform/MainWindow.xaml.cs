@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shell;
+using System.Net.NetworkInformation;
 using Xky.Core;
 using Xky.Core.Common;
 using Xky.Core.UserControl;
@@ -69,19 +70,25 @@ namespace Xky.Platform
                 // ignored
             }
 
-            //默认风格
+            // 默认风格
             _buttonStatus.Baseurl = "Resources/Icon/ControlBox/drak/";
             DataContext = _buttonStatus;
 
-            //初始化页面加载、方便调用UI线程委托
+            // 初始化页面加载、方便调用UI线程委托
             Common.MainWindow = this;
             Client.MainWindow = this;
-
-            //加载login页面
             LoginTabItem.ClickDown(null, null);
-
-            //启动状态定时器
-            new Timer {Interval = 1000, Enabled = true}.Elapsed += MainWindow_Elapsed;
+            // 加载login页面
+            if (! CheckNetworkConnected())
+            {
+                Common.ShowToast("网路未连接");
+            } 
+            else
+            {
+                //启动状态定时器
+                new Timer { Interval = 1000, Enabled = true }.Elapsed += MainWindow_Elapsed;
+            }
+            
         }
 
         private void Client_ShowToastEvent(string toast, Color color, string sound = null)
@@ -256,6 +263,94 @@ namespace Xky.Platform
                 e.Cancel = true;
             }
         }
+
+
+        #region 网络检测
+
+        /// <summary>
+        /// 检测网络是否联网
+        /// </summary>
+        public bool CheckNetworkConnected()
+        {
+            int errCount;
+
+            if (!IsLocalConnectionStatus() | !PingExtranet(out errCount))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private const int INTERNET_CONNECTION_MODEM = 1;
+        private const int INTERNET_CONNECTION_LAN = 2;
+
+        [System.Runtime.InteropServices.DllImport("winInet.dll")]
+        private static extern bool InternetGetConnectedState(ref int dwFlag, int dwReserved);
+
+        /// <summary>
+        /// 判断本地的连接状态
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool IsLocalConnectionStatus()
+        {
+            System.Int32 dwFlag = new Int32();
+            if (!InternetGetConnectedState(ref dwFlag, 0))
+            {
+                return false;
+            }
+            else
+            {
+                if ((dwFlag & INTERNET_CONNECTION_MODEM) != 0)
+                {
+                    return true;
+                }
+                else if ((dwFlag & INTERNET_CONNECTION_LAN) != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Ping命令检测网络是否畅通
+        /// </summary>
+        /// <param name="urls">URL数据</param>
+        /// <param name="errorCount">ping时连接失败个数</param>
+        /// <returns></returns>
+        public bool PingExtranet(out int errorCount)
+        {
+            // 多个常用网址
+            string url = "www.baidu.com;www.sina.com;www.cnblogs.com;www.google.com;www.163.com;www.csdn.com";
+            string[] urls = url.Split(new char[] { ';' });
+
+            Ping ping = new Ping();
+            bool isConn = true;
+            errorCount = 0;
+            try
+            {
+                PingReply pingReply;
+                for (int i = 0; i < urls.Length; i++)
+                {
+                    pingReply = ping.Send(urls[i]);
+                    if (pingReply.Status != IPStatus.Success)
+                    {
+                        isConn = false;
+                        errorCount++;
+                    }
+                }
+            }
+            catch
+            {
+                isConn = false;
+                errorCount = urls.Length;
+            }
+
+            return isConn;
+        }
+
+        #endregion
     }
 
     #region 窗体按钮状态转换模型
