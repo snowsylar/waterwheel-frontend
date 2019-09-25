@@ -53,7 +53,7 @@ namespace Xky.Platform.Pages
             {
                 if (File.Exists("noupgrade.txt"))
                     return;
-                //等一秒再删，不然上个进程没结束，删不了
+                // 等一秒再删，不然上个进程没结束，删不了
                 Thread.Sleep(1000);
                 var oldfiles = FileHelper.GetFileList(".\\", "*.old", true);
                 foreach (var oldfile in oldfiles)
@@ -106,7 +106,6 @@ namespace Xky.Platform.Pages
                 Console.WriteLine(e);
             }
         }
-
 
         private void DownFile(string filename, string msg)
         {
@@ -168,6 +167,8 @@ namespace Xky.Platform.Pages
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            // 获取远程的授权
+
             var licensekey = LicenseKey.Text.Trim();
 
             Client.StartAction(() =>
