@@ -32,10 +32,10 @@ namespace Xky.Platform.Pages
                 var json = Common.LoadJson("license");
                 if (json != null) Common.UiAction(() => { LicenseKey.Text = json["license"].ToString(); });
                 Common.UiAction(() => { LoadingTextBlock.Text = "正在检查系统更新..."; });
-                #if publish
+#if publish
                 // 正式版则检查更新
                 Upgrade();
-                #endif
+#endif
                 MirrorScreen.Decoder = new H264Decoder();
                 Thread.Sleep(500);
                 Common.UiAction(() =>

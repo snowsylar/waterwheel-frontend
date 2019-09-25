@@ -29,7 +29,9 @@ namespace Xky.Platform
     {
         public MainWindow()
         {
+#if debug
             WinConsole.ShowConsole();
+#endif 
             InitializeComponent();
             var wc = new WindowChrome
             {
@@ -131,7 +133,7 @@ namespace Xky.Platform
             });
         }
 
-        #region 事件
+#region 事件
 
         private void MyTabItem_OnOnClickEvent(MyTabItem sender, string pagename, bool dark)
         {
@@ -189,9 +191,9 @@ namespace Xky.Platform
                 }
         }
 
-        #endregion
+#endregion
 
-        #region 基础属性
+#region 基础属性
 
         //缓存内部页面提高加载效率
         private readonly Dictionary<string, System.Windows.Controls.UserControl> _userControlDic =
@@ -200,9 +202,9 @@ namespace Xky.Platform
         //记录窗口按钮状态
         private readonly ButtonStatusModel _buttonStatus = new ButtonStatusModel();
 
-        #endregion
+#endregion
 
-        #region 界面UI事件和属性
+#region 界面UI事件和属性
 
         private void MainWindow_Deactivated(object sender, EventArgs e)
         {
@@ -251,7 +253,7 @@ namespace Xky.Platform
             WindowState = WindowState.Minimized;
         }
 
-        #endregion
+#endregion
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
@@ -265,7 +267,7 @@ namespace Xky.Platform
         }
 
 
-        #region 网络检测
+#region 网络检测
 
         /// <summary>
         /// 检测网络是否联网
@@ -350,10 +352,10 @@ namespace Xky.Platform
             return isConn;
         }
 
-        #endregion
+#endregion
     }
 
-    #region 窗体按钮状态转换模型
+#region 窗体按钮状态转换模型
 
     public class ButtonStatus : IValueConverter
     {
@@ -385,5 +387,5 @@ namespace Xky.Platform
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    #endregion
+#endregion
 }
